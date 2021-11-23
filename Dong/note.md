@@ -1,3 +1,4 @@
+## 树基本公式
 ```
 /**
  * 树遍历核心
@@ -14,8 +15,9 @@ function traverse(TreeNode, root) {
 }
 ```
 
-- 求区域和的时候，可以考虑**前缀和**技巧
-  303. 区域和检索 - 数组不可变    
+## 前缀和
+#### 求区域和的时候，可以考虑**前缀和**技巧
+-  303. 区域和检索 - 数组不可变    
 ```
 /**
  * @param {number[]} nums
@@ -96,3 +98,56 @@ var subarraySum = function(nums, k) {
     return count;
 };
 ```
+## 差分数组 
+#### `频繁对原始数组的某个区间的元素进行增减`
+- 差分数组技巧-差分数组的主要适用场景是频繁对原始数组的某个区间的元素进行增减
+```
+/**
+ * 差分数组 工具方法
+ * @param {*} nums 
+ */
+
+/* 输入一个初始数组，区间操作将在这个数组上进行 */
+function Difference(nums = []) {
+  let diff = [nums[0]];
+  for (let i = 1; i < nums.length; i++) {
+    diff[i] = nums[i] - nums[i - 1];
+  }
+}
+
+/* 返回结果数组 */
+function result() {
+  // 根据差分数组构造结果数组
+  let res = [diff[0]];
+  for (let i = 1; i < diff.length; i++) {
+    res[i] = res[i - 1] + diff[i];
+  }
+  return res;
+}
+
+/* 给闭区间 [i,j] 增加 val（可以是负数）*/
+function increment(i, j, val) {
+  diff[i] += val;
+  if (j + 1 < diff.length) {
+    diff[j + 1] -= val;
+  }
+}
+```
+
+## 链表
+
+#### 快慢指针（一般适用是否闭环，求中点，环开始点）
+```
+boolean hasCycle(ListNode head) {
+    ListNode fast, slow;
+    fast = slow = head;
+    while (fast != null && fast.next != null) {
+        fast = fast.next.next;
+        slow = slow.next;
+        
+        if (fast == slow) return true;
+    }
+    return false;
+}
+```
+
