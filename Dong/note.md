@@ -151,3 +151,33 @@ boolean hasCycle(ListNode head) {
 }
 ```
 
+#### 滑动窗口
+```
+/* 滑动窗口算法框架 */
+function slidingWindow(s, t) {
+  const need = new Map();
+  const window = new Map();
+  // 初始化窗口
+  for(i of t){
+      if(need.get(i)){
+          need.set(i, need.get(i)+1)
+      }else{
+          need.set(i ,1);
+          window.set(i, 0);
+      }       
+  }
+  let left = 0, right = 0;
+  console.log(left, right) // debugger
+  while (right < s.length) {
+      let c = s[right];
+      right++;
+      ...//窗口操作
+      while(窗口缩小条件){
+          let d = s[left];
+          left++;
+          ...//窗口操作
+      }
+  }
+}
+```
+
