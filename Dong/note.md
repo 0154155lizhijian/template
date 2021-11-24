@@ -181,3 +181,22 @@ function slidingWindow(s, t) {
 }
 ```
 
+#### 二分查找
+- 框架，总结
+```
+function binarySearch(nums, target) {
+    let left = 0, right = nums.length;
+
+    while(left <= right>) {
+        let mid = ((left + right)/2) >> 0;
+        if (nums[mid] == target) {
+            ... // 求左边界的时候，right = mid - 1; 求右边界的时候 left = mid + 1; （左加右减）
+        } else if (nums[mid] < target) {
+            left = mid+1;
+        } else if (nums[mid] > target) {
+            right = mid-1
+        }
+    }
+    return ...; // 左边界就return left，右边界right
+}
+```
