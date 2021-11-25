@@ -200,3 +200,5 @@ function binarySearch(nums, target) {
     return ...; // 左边界就return left，右边界right
 }
 ```
+
+#### 应用
