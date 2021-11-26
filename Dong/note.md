@@ -234,4 +234,26 @@ int solution(int[] nums, int target) {
     }
     return left;
 }
+
+
+// 很多类似的问题都可以用这种方式去计算最值
+int split(int[] nums, int max) {
+    // 至少可以分割的子数组数量
+    int count = 1;
+    // 记录每个子数组的元素和
+    int sum = 0;
+    for (int i = 0; i < nums.length; i++) {
+        if (sum + nums[i] > max) {
+            // 如果当前子数组和大于 max 限制
+            // 则这个子数组不能再添加元素了
+            count++;
+            sum = nums[i];
+        } else {
+            // 当前子数组和还没达到 max 限制
+            // 还可以添加元素
+            sum += nums[i];
+        }
+    }
+    return count;
+}
 ```
