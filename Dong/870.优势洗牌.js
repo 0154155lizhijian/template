@@ -10,6 +10,7 @@
  * @return {number[]}
  */
  var advantageCount = function(nums1, nums2) {
+  // 排序双方速度
   nums1.sort((a, b) => a-b);
   const len = nums2.length;
   const IndexNums2 = new Array(len).fill(0).map((_, i) => i);
@@ -21,15 +22,15 @@
     }
   });
   let i=0, j=0; // nums1，nums2的初始位置
-  let n=len-1;
+  let n=len-1; // 对应nums最大的值
   let res = new Array(len).fill(0);
   while(i < len){
-    if(nums1[i] > nums2[IndexNums2[j]]){
-      res[IndexNums2[j]] = nums1[i];
-      j++;
+    if(nums1[i] > nums2[IndexNums2[j]]){ // 对应场次，跑得过
+      res[IndexNums2[j]] = nums1[i]; // 对应nums2的排兵布阵，放对应的马
+      j++; // nums2换下一批，继续找策略
     }else{
-      res[IndexNums2[n]] = nums1[i];
-      n--;
+      res[IndexNums2[n]] = nums1[i];  // 跑不过，去找nums最快的马
+      n--; // nums第二快的马...第三第四..
     }
     i++;
   }
