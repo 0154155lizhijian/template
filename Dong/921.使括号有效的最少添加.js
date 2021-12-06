@@ -10,16 +10,32 @@
  * @return {number}
  */
  var minAddToMakeValid = function(s) {
-  const match = new Map([[')', '(']]);
-  const stack = [];
+  // const match = new Map([[')', '(']]);
+  // const stack = [];
+  // for( c of s){
+  //     if( stack.length && match.get(c) === stack[stack.length-1] ){
+  //         stack.pop();
+  //     }else{
+  //         stack.push(c);
+  //     }
+  // }
+  // return stack.length;
+  // 优化
+  let need = 0; // 变量记录右括号的需求量
+  let res = 0; // 多余的右括号
   for( c of s){
-      if( stack.length && match.get(c) === stack[stack.length-1] ){
-          stack.pop();
-      }else{
-          stack.push(c);
+      if(c === '('){
+          need++;
+      }
+      if(c === ')'){
+          need--;
+          if(need === -1){
+              need = 0;
+              res++;
+          }
       }
   }
-  return stack.length;
+  return res + need;
 };
 // @lc code=end
 
