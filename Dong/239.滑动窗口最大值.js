@@ -10,11 +10,6 @@
  * @param {number} k
  * @return {number[]}
  */
-/**
- * @param {number[]} nums
- * @param {number} k
- * @return {number[]}
- */
  var maxSlidingWindow = function(nums, k) {
   // 单调队列
   const len = nums.length;
