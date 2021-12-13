@@ -1,20 +1,3 @@
-## 树基本公式
-```
-/**
- * 树遍历核心
- * @param {Node} TreeNode 
- * @param {*} root 
- */
-
-function traverse(TreeNode, root) {
-  // 前序遍历代码位置
-   traverse(root.left);
-  // 中序遍历代码位置
-   traverse(root.right);
-  // 后序遍历代码位置 
-}
-```
-
 ## 前缀和
 #### 求区域和的时候，可以考虑**前缀和**技巧
 -  303. 区域和检索 - 数组不可变    
@@ -136,7 +119,7 @@ function increment(i, j, val) {
 
 ## 链表
 
-#### 快慢指针（一般适用是否闭环，求中点，环开始点）
+#### 快慢指针（一般适用是否闭环，求中点，环开始点,原地修改XXX）
 ```
 boolean hasCycle(ListNode head) {
     ListNode fast, slow;
@@ -257,3 +240,34 @@ int split(int[] nums, int max) {
     return count;
 }
 ```
+
+### 树基本公式
+```
+/**
+ * 树遍历核心
+ * @param {Node} TreeNode 
+ * @param {*} root 
+ */
+
+function traverse(TreeNode, root) {
+  // 前序遍历代码位置
+   traverse(root.left);
+  // 中序遍历代码位置
+   traverse(root.right);
+  // 后序遍历代码位置 
+}
+```
+
+### 二叉搜索树
+```
+function BST(TreeNode root, int target) {
+    if (root.val == target)
+        // 找到目标，做点什么
+    if (root.val < target) 
+        BST(root.right, target);
+    if (root.val > target)
+        BST(root.left, target);
+}
+```
+
+
