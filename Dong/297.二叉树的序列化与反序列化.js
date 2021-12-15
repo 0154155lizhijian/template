@@ -71,11 +71,11 @@ const tree = getTreeFromLayerOrderArray([1,2,3,4,5]);
   */
  var deserialize = function(data) {
     const list = data.split(',');
-    console.log(list);
+    return reDeserialize(list);
  };
 
- function reDeserialize(){
-
+ function reDeserialize(list){
+    
  }
 
  deserialize(serialize(tree));
