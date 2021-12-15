@@ -58,3 +58,6 @@ function getLayerOrderArrayFromTree(root) {
   while (res.length > 1 && res[res.length - 1] == null) res.pop(); // 删掉结尾的 null
   return res;
 }
+
+
+export {getTreeFromLayerOrderArray, getLayerOrderArrayFromTree};
