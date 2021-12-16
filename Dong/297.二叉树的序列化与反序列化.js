@@ -54,7 +54,7 @@ const tree = getTreeFromLayerOrderArray([1,2,3,4,5]);
  
  function traverse(root){
      if(root === null){
-         res = res.concat(END).concat(SPE);
+         res = res.concat(SPE).concat(END);
          return res;
      }
      res = res.concat(root.val).concat(SPE);
@@ -71,14 +71,19 @@ const tree = getTreeFromLayerOrderArray([1,2,3,4,5]);
   */
  var deserialize = function(data) {
     const list = data.split(',');
-    console.log(list);
+    return reDeserialize(list);
  };
 
- function reDeserialize(){
-
+ function reDeserialize(list){
+    if(!list.length) return null;
+    const root = new TreeNode(list[0]);
+    list.shift();
+    root.left = reDeserialize(list);
+    root.right = reDeserialize(list);
+    return root;
  }
 
- deserialize(serialize(tree));
+ console.log(deserialize(serialize(tree)));
  
  /**
   * Your functions will be called as such:
