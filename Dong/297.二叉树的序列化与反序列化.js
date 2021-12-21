@@ -111,12 +111,51 @@
  
 // 层级遍历
  var serialize = function(root) {
-    
+    if(!root) return '';
+    const result = ser(root);
+    return result.join();
  };
+
+ function ser(root){
+    const res = [];
+    const queue = [root];
+    while(queue.length){
+        const top = queue.shift();
+        if(!top){
+            res.push(END);
+            continue;
+        }
+        res.push(top.val);
+        queue.push(top.left, top.right);
+    }
+    return res;
+ }
 
 
  var deserialize = function(data) {
-    
+    if(!data) return null;
+    const list = data.split(',');
+    const len = list.length;
+    const root = new TreeNode(list[0]);
+    const queue = [root];
+    for (let i = 1; i < len;) {
+        const node = queue.shift();
+        const left = list[i++];
+        if(left !== END){
+            node.left = new TreeNode(left);
+            queue.push(node.left);
+        }else{
+            node.left = null;
+        }
+        const right = list[i++];
+        if(right !== END){
+            node.right = new TreeNode(right);
+            queue.push(node.right);
+        }else{
+            node.right = null;
+        }
+    }
+    return root;
 };
 
 
