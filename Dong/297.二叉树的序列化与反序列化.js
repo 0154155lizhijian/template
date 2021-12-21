@@ -12,54 +12,26 @@
  *     this.left = this.right = null;
  * }
  */
- function TreeNode(val, left = null, right = null) {
-  this.val = val;
-  this.left = left;
-  this.right = right;
-}
- function getTreeFromLayerOrderArray(array) {
-  let n = array.length;
-  if (!n) return null;
-  let index = 0;
-  let root = new TreeNode(array[index++]);
-  let queue = [root];
-  while(index < n) {
-      let top = queue.shift();
-      let v = array[index++];
-      top.left = v == null ? null : new TreeNode(v);
-      if (index < n) {
-          let v = array[index++];
-          top.right = v == null ? null : new TreeNode(v);
-      }
-      if (top.left) queue.push(top.left);
-      if (top.right) queue.push(top.right);
-  }
-  return root;
-}
-
-const tree = getTreeFromLayerOrderArray([1,2,3,4,5]);
-
+ const END = '#';
  /**
   * Encodes a tree to a single string.
   *
   * @param {TreeNode} root
   * @return {string}
   */
- const SPE = ',';
- const END = '#';
- let res = '';
  var serialize = function(root) {
-     return traverse(root);
+     const result = traverse(root, []);
+     return result.join()
  };
  
- function traverse(root){
-     if(root === null){
-         res = res.concat(SPE).concat(END);
+ function traverse(root, res){
+     if(root == null){
+         res.push(END);
          return res;
-     }
-     res = res.concat(root.val).concat(SPE);
-     traverse(root.left);
-     traverse(root.right);
+     };
+     res.push(root.val);
+     traverse(root.left, res);
+     traverse(root.right, res);
      return res;
  }
  
@@ -70,20 +42,27 @@ const tree = getTreeFromLayerOrderArray([1,2,3,4,5]);
   * @return {TreeNode}
   */
  var deserialize = function(data) {
-    const list = data.split(',');
-    return reDeserialize(list);
+     const list = data.split(',');
+     return retree(list);
  };
-
- function reDeserialize(list){
-    if(!list.length) return null;
-    const root = new TreeNode(list[0]);
-    list.shift();
-    root.left = reDeserialize(list);
-    root.right = reDeserialize(list);
-    return root;
- }
-
- console.log(deserialize(serialize(tree)));
+ 
+ function retree(data){
+     if(!data.length) return null;
+     if(data[0] === END){
+         data.shift();
+         return null;
+     }
+     const root = new TreeNode(data[0]);
+     data.shift();
+     root.left = retree(data);
+     root.right = retree(data);
+     return root;
+ };
+ 
+ /**
+  * Your functions will be called as such:
+  * deserialize(serialize(root));
+  */
  
  /**
   * Your functions will be called as such:
