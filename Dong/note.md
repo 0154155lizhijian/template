@@ -290,3 +290,25 @@ def backtrack(路径, 选择列表):
         将该选择再加⼊选择列表
 ```
 
+
+### 二维矩阵遍历框架
+
+```
+function dfs(grid, i, j, visited) {
+    const m = grid.length, n = grid[0].length;
+    if (i < 0 || j < 0 || i >= m || j >= n) {
+        // 超出索引边界
+        return;
+    }
+    if (visited[i][j]) {
+        // 已遍历过 (i, j)
+        return;
+    }
+    // 进入节点 (i, j)
+    visited[i][j] = true;
+    dfs(grid, i - 1, j); // 上
+    dfs(grid, i + 1, j); // 下
+    dfs(grid, i, j - 1); // 左
+    dfs(grid, i, j + 1); // 右
+}
+```
