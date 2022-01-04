@@ -241,7 +241,7 @@ int split(int[] nums, int max) {
 }
 ```
 
-### 树基本公式
+### 二叉树基本公式
 ```
 /**
  * 树遍历核心
@@ -255,6 +255,17 @@ function traverse(TreeNode, root) {
   // 中序遍历代码位置
    traverse(root.right);
   // 后序遍历代码位置 
+}
+```
+
+### 遍历多叉树
+```
+/* 多叉树遍历框架 */
+function traverse(root) {
+    if (root == null) return;
+    for (child of root.children){
+        traverse(child);
+    }
 }
 ```
 
