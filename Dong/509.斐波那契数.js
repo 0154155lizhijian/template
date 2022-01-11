@@ -19,12 +19,24 @@
       // const memo = new Array(n+1).fill(0);
       // return build(memo, n)
       // 动态规划解决
-      const dp =  new Array(n).fill(0);
-      dp[0] = 0; dp[1] = 1;
-      for(let i= 2; i<=n; i++){
-          dp[i] = dp[i-1] + dp[i-2];
+      // const dp =  new Array(n).fill(0);
+      // dp[0] = 0; dp[1] = 1;
+      // for(let i= 2; i<=n; i++){
+      //     dp[i] = dp[i-1] + dp[i-2];
+      // }
+      // return dp[n];
+      // 状态压缩，只存需要存储的状态
+      if(n == 0) return 0;
+      if( n ==1 || n ==2){
+          return 1;
       }
-      return dp[n];
+      let preSum = 1; cur = 1;
+      for(let i = 3; i<= n; i++){
+          let sum = preSum + cur;
+          preSum = cur;
+          cur = sum;
+      }
+      return cur;
   };
   
   // const build = (memo, n) => {
