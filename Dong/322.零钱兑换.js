@@ -10,7 +10,7 @@
  * @param {number} amount
  * @return {number}
  */
-let memo = [];
+// let memo = [];
 var coinChange = function(coins, amount) {
 // 自顶向下
 //   memo = new Array(amount+1).fill(0);
@@ -47,7 +47,39 @@ var coinChange = function(coins, amount) {
   // }
 
   // return dp[amount] == amount+1 ? -1 : dp[amount];
+  // BFS
+  if(amount === 0) return 0;
+  coins.sort((a, b)=> a-b);
+  const visited = new Array(amount+1).fill(false);
+  const queue = [amount];
+  visited[amount] = true;
+  let step = 1;
+  while (queue.length) {
+    const n = queue.length;
+    for(let i=0; i< n; i++){
+      const current = queue.shift();
+      // 做扩散
+      for (const coin of coins) {
+        // 剩下的容量
+        const rest = current - coin;
+        if(rest == 0){
+          return step;
+        }
+        if(current < 0){
+          continue;
+        }
+        if(!visited[rest]){
+          visited[rest] = true;
+          queue.push(rest);
+        }
+      }
+    }
+    step++;
+  }
+  return -1;
 }
+
+coinChange([1,2,5], 11);
 
 
 // @lc code=end
