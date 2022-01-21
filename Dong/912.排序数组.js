@@ -13,27 +13,36 @@ var sortArray = function (nums) {
   // 利用api
   // return nums.sort((a,b) => a-b);
   // 选择排序  最简单也最鸡肋 且时间不稳定
-  // 原理： 先找到数组中最小的数，和第一个数换位置 || 找到最大最小，交换
-  for (let l = 0, r = nums.length - 1; l < r; l++, r--) {
-    let min = l;
-    let max = r;
+  // 原理： 先找到数组中最小的数，和第一个数换位置 || 优化： 找到最大最小，交换
+//   for (let l = 0, r = nums.length - 1; l < r; l++, r--) {
+//     let min = l;
+//     let max = r;
 
-    for (let j = l; j <= r; j++) {
-      if (nums[j] < nums[min]) {
-        min = j;
-      }
-      if (nums[j] > nums[max]) {
-        max = j;
-      }
+//     for (let j = l; j <= r; j++) {
+//       if (nums[j] < nums[min]) {
+//         min = j;
+//       }
+//       if (nums[j] > nums[max]) {
+//         max = j;
+//       }
+//     }
+//     swap(nums, min, l);
+//     if(l == max){
+//       max = min;
+//     }
+//     swap(nums, max, r);
+//   }
+ // 冒泡排序
+ for(let i = 0; i<nums.length-1; i++){
+  for(let j = i+1; j<nums.length; j++){
+    if(nums[i] > nums[j]){
+      swap(nums, i, j);
     }
-    swap(nums, min, l);
-    if(l == max){
-      max = min;
-    }
-    swap(nums, max, r);
   }
-  return nums;
+ };
+ return nums;
 };
+
 
 const swap = (list, l, j) => {
   const temp = list[l];
@@ -42,4 +51,4 @@ const swap = (list, l, j) => {
 };
 // @lc code=end
 
-console.log(sortArray([5,2,3,1]));
+console.log(sortArray([5,2,3,1,4,3,2,3,4,1,2,4,23,0,88]));
