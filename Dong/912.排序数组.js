@@ -9,30 +9,37 @@
  * @param {number[]} nums
  * @return {number[]}
  */
-var sortArray = function(nums) {
+var sortArray = function (nums) {
   // 利用api
   // return nums.sort((a,b) => a-b);
   // 选择排序  最简单也最鸡肋 且时间不稳定
-  // 原理： 先找到数组中最小的数，和第一个数换位置
-  // for(let i = 0; i< nums.length; i++){
-  //   let min = i;
-  //   for(let j = i+1; j<nums.length; j++){
-  //     if(nums[j] < nums[min]){
-  //       min = j;
-  //     }
-  //   }
-  //   if(min !== i){
-  //     swap(nums, min, i);
-  //   }
-  // }
+  // 原理： 先找到数组中最小的数，和第一个数换位置 || 找到最大最小，交换
+  for (let l = 0, r = nums.length - 1; l < r; l++, r--) {
+    let min = l;
+    let max = r;
+
+    for (let j = l; j <= r; j++) {
+      if (nums[j] < nums[min]) {
+        min = j;
+      }
+      if (nums[j] > nums[max]) {
+        max = j;
+      }
+    }
+    swap(nums, min, l);
+    if(l == max){
+      max = min;
+    }
+    swap(nums, max, r);
+  }
   return nums;
 };
 
-const swap = (list, i, j) => {
-  const temp = list[i];
-  list[i] = list[j];
+const swap = (list, l, j) => {
+  const temp = list[l];
+  list[l] = list[j];
   list[j] = temp;
-}
+};
 // @lc code=end
 
-console.log(sortArray([2,3,4,1,5,7,9,6]));
+console.log(sortArray([5,2,3,1]));
