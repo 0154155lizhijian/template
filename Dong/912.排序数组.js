@@ -17,7 +17,6 @@ var sortArray = function (nums) {
   //   for (let l = 0, r = nums.length - 1; l < r; l++, r--) {
   //     let min = l;
   //     let max = r;
-
   //     for (let j = l; j <= r; j++) {
   //       if (nums[j] < nums[min]) {
   //         min = j;
@@ -47,31 +46,37 @@ var sortArray = function (nums) {
   //   }
   //  };
   // 双向冒泡
-//   let left = 0,
-//     right = nums.length - 1,
-//     swapFlag = true;
-//   while (left < right && swapFlag) {
-//     swapFlag = false;
-//     // 第一趟先把元素值最大的放在序列的最后面
-//     for (let i = left; i < right; i++) {
-//       if (nums[i] > nums[i + 1]) {
-//         // 前一个元素的值大于后一个元素的值
-//         swap(nums, i, i + 1);
-//         swapFlag = true; // 发生了元素交换，flag置为true
-//       }
-//     }
-//     right--; // 更新上界
-//     // 第二趟把元素值最小的放在序列的最前面
-//     for (let i = right; i > left; i--) {
-//       if (nums[i] < nums[i - 1]) {
-//         // 后一个元素的值小于前一个元素的值
-//         swap(nums, i, i - 1);
-//         swapFlag = true; // 发生了元素交换，flag置为true
-//       }
-//     }
-//     left++; // 更新下界
-//   }
-//   return nums;
+  //   let left = 0,
+  //     right = nums.length - 1,
+  //     swapFlag = true;
+  //   while (left < right && swapFlag) {
+  //     swapFlag = false;
+  //     // 第一趟先把元素值最大的放在序列的最后面
+  //     for (let i = left; i < right; i++) {
+  //       if (nums[i] > nums[i + 1]) {
+  //         // 前一个元素的值大于后一个元素的值
+  //         swap(nums, i, i + 1);
+  //         swapFlag = true; // 发生了元素交换，flag置为true
+  //       }
+  //     }
+  //     right--; // 更新上界
+  //     // 第二趟把元素值最小的放在序列的最前面
+  //     for (let i = right; i > left; i--) {
+  //       if (nums[i] < nums[i - 1]) {
+  //         // 后一个元素的值小于前一个元素的值
+  //         swap(nums, i, i - 1);
+  //         swapFlag = true; // 发生了元素交换，flag置为true
+  //       }
+  //     }
+  //     left++; // 更新下界
+  //   }
+  // 插入排序
+  for(let i=1; i<nums.length; i++){
+    for(let j=i; j>0 && nums[j] < nums[j-1]; j--){
+      swap(nums, j, j-1);
+    }
+  }
+  return nums;
 };
 
 const swap = (list, l, j) => {
@@ -82,3 +87,4 @@ const swap = (list, l, j) => {
 // @lc code=end
 
 console.log(sortArray([5, 2, 3, 1, 4, 3, 2, 3, 4, 1, 2, 4, 23, 0, 88]));
+console.log(sortArray([5, 2, 3, 1]));
