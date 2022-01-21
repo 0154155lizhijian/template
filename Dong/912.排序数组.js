@@ -33,11 +33,17 @@ var sortArray = function (nums) {
 //     swap(nums, max, r);
 //   }
  // 冒泡排序
- for(let i = 0; i<nums.length-1; i++){
-  for(let j = i+1; j<nums.length; j++){
-    if(nums[i] > nums[j]){
-      swap(nums, i, j);
+ // 优化，若不进行交换了，则直接输出
+ for(let i = nums.length-1; i>0; i--){
+  let swapFlag = false; 
+  for(let j=0; j<i; j++){
+    if(nums[j] > nums[j+1]){
+      swap(nums, j, j+1);
+      swapFlag = true;
     }
+  }
+  if(!swapFlag){
+    return nums;
   }
  };
  return nums;
