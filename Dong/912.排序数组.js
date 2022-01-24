@@ -71,11 +71,23 @@ var sortArray = function (nums) {
   //     left++; // 更新下界
   //   }
   // 插入排序
-  for(let i=1; i<nums.length; i++){
-    for(let j=i; j>0 && nums[j] < nums[j-1]; j--){
-      swap(nums, j, j-1);
-    }
-  }
+  // for(let i=1; i<nums.length; i++){
+  //   for(let j=i; j>0 && nums[j] < nums[j-1]; j--){
+  //     swap(nums, j, j-1);
+  //   }
+  // }
+  // 希尔排序 -改进的插入排序
+  // let h = 1;
+  // while (h < arr.length / 3) {
+  //   h = h * 3+1;
+  // }
+  // for (let gap = h; gap > 0; gap = (gap-1)/ 3) {
+  //   for (let i = gap; i < nums.length; i++) {
+  //     for (let j = i; j > gap - 1 && nums[j] < nums[j - gap]; j -= gap) {
+  //       swap(nums, j, j - 1);
+  //     }
+  //   }
+  // }
   return nums;
 };
 
