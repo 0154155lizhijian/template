@@ -77,19 +77,45 @@ var sortArray = function (nums) {
   //   }
   // }
   // 希尔排序 -改进的插入排序
-  let h = 1;
-  while (h < nums.length / 3) {
-    h = h * 3+1;
+  // let h = 1;
+  // while (h < nums.length / 3) {
+  //   h = h * 3+1;
+  // }
+  // for (let gap = h; gap > 0; gap = (gap-1)/ 3) {
+  //   for (let i = gap; i < nums.length; i++) {
+  //     for (let j = i; j > gap - 1 && nums[j] < nums[j - gap]; j -= gap) {
+  //       swap(nums, j, j - 1);
+  //     }
+  //   }
+  // }
+  // 归并排序
+  const len = nums.length;
+  if(len < 2){
+    return nums;
   }
-  for (let gap = h; gap > 0; gap = (gap-1)/ 3) {
-    for (let i = gap; i < nums.length; i++) {
-      for (let j = i; j > gap - 1 && nums[j] < nums[j - gap]; j -= gap) {
-        swap(nums, j, j - 1);
-      }
+  const mid = nums.length >> 1;
+  const left = nums.slice(0, mid);
+  const right = nums.slice(mid)
+  return merge(sortArray(left), sortArray(right));
+};
+
+const merge = (left, right) => {
+  let result = [];
+  while (left.length && right.length) {
+    if(left[0] > right[0]){
+      result.push(right.shift());
+    }else{
+      result.push(left.shift());
     }
   }
-  return nums;
-};
+  while (left.length) {
+    result.push(left.shift())
+  }
+  while (right.length) {
+    result.push(right.shift())
+  }
+  return result;
+}
 
 const swap = (list, l, j) => {
   const temp = list[l];
