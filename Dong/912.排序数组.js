@@ -89,33 +89,49 @@ var sortArray = function (nums) {
   //   }
   // }
   // 归并排序
-  const len = nums.length;
-  if(len < 2){
+  // const len = nums.length;
+  // if(len < 2){
+  //   return nums;
+  // }
+  // const mid = nums.length >> 1;
+  // const left = nums.slice(0, mid);
+  // const right = nums.slice(mid)
+  // return merge(sortArray(left), sortArray(right));
+  // 快速排序
+  if( nums.length < 2){
     return nums;
   }
-  const mid = nums.length >> 1;
-  const left = nums.slice(0, mid);
-  const right = nums.slice(mid)
-  return merge(sortArray(left), sortArray(right));
-};
-
-const merge = (left, right) => {
-  let result = [];
-  while (left.length && right.length) {
-    if(left[0] > right[0]){
-      result.push(right.shift());
+  const pivotIndex = nums.length >> 1;
+  const pivot = nums.splice(pivotIndex, 1)[0];
+  let left = [];
+  let right = [];
+  for (let i = 0; i < nums.length; i++) {
+    if(nums[i] <= pivot){
+      left.push(nums[i])
     }else{
-      result.push(left.shift());
+      right.push(nums[i])
     }
   }
-  while (left.length) {
-    result.push(left.shift())
-  }
-  while (right.length) {
-    result.push(right.shift())
-  }
-  return result;
-}
+  return sortArray(left).concat(pivot, sortArray(right))
+};
+
+// const merge = (left, right) => {
+//   let result = [];
+//   while (left.length && right.length) {
+//     if(left[0] > right[0]){
+//       result.push(right.shift());
+//     }else{
+//       result.push(left.shift());
+//     }
+//   }
+//   while (left.length) {
+//     result.push(left.shift())
+//   }
+//   while (right.length) {
+//     result.push(right.shift())
+//   }
+//   return result;
+// }
 
 const swap = (list, l, j) => {
   const temp = list[l];
